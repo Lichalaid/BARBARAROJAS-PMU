@@ -1,0 +1,37 @@
+{
+  "name": "base-app",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "prestart": "npx eslint . --no-ignore",
+    "start": "node ./dist/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "npx rollup -c"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@adiwajshing/baileys": "^5.0.0",
+    "@builderbot-plugins/telegram": "^1.0.0",
+    "@builderbot/bot": "1.0.6-alpha.0",
+    "@builderbot/provider-baileys": "1.0.6-alpha.0",
+    "chrono-node": "^2.7.7",
+    "date-fns": "^3.3.1",
+    "dotenv": "^16.4.2",
+    "express": "^4.21.2",
+    "multer": "1.4.5-lts.1",
+    "openai": "^4.27.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "eslint": "^8.52.0",
+    "eslint-plugin-builderbot": "1.0.6-alpha.0",
+    "nodemon": "^3.1.0",
+    "rollup": "^4.28.1",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.7.2"
+  }
+}
