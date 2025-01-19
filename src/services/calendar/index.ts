@@ -12,7 +12,7 @@ const getCurrentCalendar = async (): Promise<string[]> => {
 
         // Verificar que la respuesta sea exitosa
         if (!response.ok) {
-            console.error("Error en la respuesta de la API", response.statusText);
+            console.error("Error en la respuesta de la API:", response.statusText);
             return [];
         }
 
@@ -20,10 +20,14 @@ const getCurrentCalendar = async (): Promise<string[]> => {
         const rawResponse = await response.text();
         console.log("Datos crudos de la API:", rawResponse);
 
-        // Intentar parsear la respuesta JSON
-        const json: { date: string; name: string; email: string | null }[] = JSON.parse(rawResponse);
-
-        console.log("Respuesta de la API como JSON:", json);
+        let json: { date: string; name: string; email: string | null }[];
+        try {
+            json = JSON.parse(rawResponse);
+            console.log("Respuesta de la API como JSON:", json);
+        } catch (err) {
+            console.error("Error al parsear el JSON:", err);
+            return [];
+        }
 
         // Procesar los datos y formatear las fechas correctamente
         const list = json
@@ -84,11 +88,14 @@ const appToCalendar = async (payload: { name: string; email: string; startDate: 
 
         if (!response.ok) {
             console.error("Error al agregar el turno en la API:", response.statusText);
+            return null;
         }
 
+        console.log("Turno agregado correctamente:", await response.json());
         return response;
     } catch (err) {
         console.error("Error al agregar el turno:", err);
+        return null;
     }
 };
 
